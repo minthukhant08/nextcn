@@ -3,8 +3,7 @@ import { Geist, Geist_Mono, Outfit } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
-import AppSideBar from "@/components/app-side-bar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ToastContainer } from 'react-toastify';
 
 const outfit = Outfit({subsets:['latin'],variable:'--font-sans'})
 
@@ -26,7 +25,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          
+          <ToastContainer />
           {children}
         </ThemeProvider>
       </body>
