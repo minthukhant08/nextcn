@@ -6,15 +6,14 @@ import SearchButton from "@/template/products/search-button"
 
 type Props = {
   searchParams: {
-    search?: string
+    q?: string,
+    limit?: number
   }
 }
 
 export default async function Products({ searchParams }: Props){
-    const { search } = await searchParams
-   console.log(await searchParams)
-    const result = await productAPI.all(search)
-    console.log(result)
+    const { q, limit  } = await searchParams
+    const result = await productAPI.all({ limit, q})
     return <div>
         <SearchButton/>
         <div className="grid grid-cols-3 gap-4">
