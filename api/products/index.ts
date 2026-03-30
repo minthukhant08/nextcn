@@ -1,5 +1,5 @@
 import axios from '@/api'
 
 export const productAPI = {
-    all: () => axios.get("/products"),
+    all: (search?:string) => axios.get<ProductResponse>("/products/search?q=" + search),
 }
