@@ -6,12 +6,14 @@ import { useContext, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { toQueryString } from "@/utils"
 import { AuthContext } from "@/providers/auth-context-provider"
+import { useLoginStore } from "../login/store"
 
 
 export default  function SearchButton() {
     const param = useSearchParams()   
     const [ q , setQ ] = useState("")
     const router = useRouter();
+    const { email } = useLoginStore()
     
     const handleSearch = () => {
         router.push('/products' + toQueryString({ q, limit: 5}))
@@ -22,6 +24,7 @@ export default  function SearchButton() {
     }, [])
 
     return <div className="flex">
+        {email}
         <Input value={q} id="search-key" onChange={(e) => setQ(e.target.value)} placeholder="Search...." />   
         <Button onClick={handleSearch}>Search</Button>
     </div>

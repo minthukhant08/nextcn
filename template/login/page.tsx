@@ -24,6 +24,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/auth-context-provider";
+import { useLoginStore } from "./store";
 const formSchema = z.object({
   email: z.email("Please enter a valid email address"),
   password: z.string().min(1, "Password is required").max(8)
@@ -31,7 +32,7 @@ const formSchema = z.object({
 
 export default function Login() {
   const router = useRouter();
-  const { setLogin } = useContext(AuthContext)
+  const { setEmail } = useLoginStore()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
@@ -39,7 +40,7 @@ export default function Login() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       console.log(values);
-      setLogin(true)
+      setEmail(values.email)
       router.replace("/products")
     } catch (error) {
       console.error("Form submission error", error);

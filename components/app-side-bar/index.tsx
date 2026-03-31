@@ -1,8 +1,11 @@
+'use client'
 import { Backpack, BarChart, Bell, CreditCard, Home, LogOut, Mail, Settings, ShoppingCart, User, Users } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarMenuItem } from "../ui/sidebar";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Button } from "../ui/button";
+import { useLoginStore } from "@/template/login/store";
+import { useRouter } from "next/navigation";
 
 type MenuItem = {
     url: string,
@@ -39,6 +42,12 @@ const routes: Array<MenuItem> = [
 ];
 export default function AppSideBar() {
     const user_role = "SUPER_ADMIN"
+    const { setEmail } = useLoginStore()
+    const router = useRouter()
+    const handleLogout = () => {
+        setEmail("")
+        router.replace("/")
+    }
     return <Sidebar>
         <SidebarHeader>header</SidebarHeader>
         <SidebarContent>
@@ -47,7 +56,7 @@ export default function AppSideBar() {
             }
         </SidebarContent>
         <SidebarFooter>
-            <Button>Logout</Button>
+            <Button onClick={handleLogout}>Logout</Button>
         </SidebarFooter>
     </Sidebar>
 }
