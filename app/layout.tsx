@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import { ToastContainer } from 'react-toastify';
+import AuthContextProvider from "@/providers/auth-context-provider";
 
 const outfit = Outfit({subsets:['latin'],variable:'--font-sans'})
 
@@ -25,8 +26,10 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
+          <AuthContextProvider>
           <ToastContainer />
           {children}
+          </AuthContextProvider>
         </ThemeProvider>
       </body>
     </html>

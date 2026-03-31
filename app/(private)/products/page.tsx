@@ -1,7 +1,9 @@
 
 import { productAPI } from "@/api/products"
 import ProductCard from "@/components/product-card"
+import { AuthContext } from "@/providers/auth-context-provider"
 import SearchButton from "@/template/products/search-button"
+import { useContext } from "react"
 
 
 type Props = {
@@ -13,6 +15,7 @@ type Props = {
 
 export default async function Products({ searchParams }: Props){
     const { q, limit  } = await searchParams
+
     const result = await productAPI.all({ limit, q})
     return <div>
         <SearchButton/>
