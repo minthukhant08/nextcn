@@ -52,7 +52,7 @@ export default function AppSideBar() {
         <SidebarHeader>header</SidebarHeader>
         <SidebarContent>
             {
-                routes.map( (route) =>  route.roles.includes(user_role) ? <SidebarMenuItem> <Link href={route.url}><div className="flex">{route.icon} {route.label}</div></Link> </SidebarMenuItem> : <></>)
+                routes.map( (route, index) =>  route.roles.includes(user_role) ? <SidebarMenuItem key={index}> <Link href={route.url}><div className="flex">{route.icon} {route.label}</div></Link> </SidebarMenuItem> : <></>)
             }
         </SidebarContent>
         <SidebarFooter>

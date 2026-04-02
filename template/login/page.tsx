@@ -25,9 +25,10 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/auth-context-provider";
 import { useLoginStore } from "./store";
+import { signIn } from "next-auth/react";
 const formSchema = z.object({
   email: z.email("Please enter a valid email address"),
-  password: z.string().min(1, "Password is required").max(8)
+  password: z.string().min(1, "Password is required")
 });
 
 export default function Login() {
@@ -35,13 +36,21 @@ export default function Login() {
   const { setEmail } = useLoginStore()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: 'admin@leneion.com',
+      password: 'Password@123'
+    }
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      setEmail(values.email)
-      router.replace("/products")
+      // console.log(values);
+      // setEmail(values.email)
+      signIn('credentials', {
+          email: values.email,
+          password: values.password
+      })
+      router.replace("/accounts")
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
