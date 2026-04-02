@@ -1,3 +1,4 @@
 export default {
-    login: 'v1/auth/login'
+    login: 'v1/auth/login',
+    logout: 'v1/auth/logout'
 }

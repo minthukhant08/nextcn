@@ -15,24 +15,15 @@ export const authOptions: AuthOptions = {
 
             async authorize(credentials, _req){
                 try {
-                    // const res = await authAPI.login({ email: credentials?.email!, password: credentials?.password!})
-                    // const body = res.data.data.user
-
-                    // return {
-                    //     ...body,
-                    //     accessToken: res.data.data.accessToken,
-                    //     refreshToken: res.data.data.refreshToken
-                    // }
+                    const res = await authAPI.login({ email: credentials?.email!, password: credentials?.password!})
+                    const body = res.data.data.user
 
                     return {
-                        accessToken: "sdfsd",
-                        refreshToken: "sdfsd",
-                        email: credentials?.email!,
-                        firstName: "asdfasd",
-                        lastName: "sdfads",
-                        id: '1',
-                        roles: [ "ADMIN", "ADMIN"],
+                        ...body,
+                        accessToken: res.data.data.accessToken,
+                        refreshToken: res.data.data.refreshToken
                     }
+
                 } catch (error) {
                     console.log(error)
                     return null

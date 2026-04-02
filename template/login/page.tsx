@@ -47,10 +47,15 @@ export default function Login() {
       // console.log(values);
       // setEmail(values.email)
       signIn('credentials', {
+          redirect: false,
           email: values.email,
           password: values.password
+      }).then((res) => {
+        if ( res?.status == 200){
+            router.replace("/accounts")
+        }
       })
-      router.replace("/accounts")
+    
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
