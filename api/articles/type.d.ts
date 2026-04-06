@@ -1,0 +1,4 @@
+
+type CreateArticleResponse = {
+    id :string,
+}

@@ -42,7 +42,6 @@ const routes: Array<MenuItem> = [
 const checkAccess = ( user_roles: Roles[], menu_roles: Roles[]) => {
     let hasAccess = false;
     menu_roles.map((r) => {
-        console.log(r, user_roles, 'users roles....')
         if (user_roles.includes(r)){
             hasAccess = true
         }
